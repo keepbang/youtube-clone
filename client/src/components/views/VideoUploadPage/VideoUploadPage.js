@@ -50,7 +50,7 @@ function VideoUploadPage(){
         }
         formData.append("file",files[0]);
 
-        Axios.post('/api/video/uploadfiles',formData, config)
+        Axios.post('/api/video/uploaded',formData, config)
             .then(response =>{
                 if(response.data.success){
                     console.log(response);
@@ -63,7 +63,7 @@ function VideoUploadPage(){
                     Axios.post('/api/video/thumbnail', variable)
                         .then(res => {
                             if(res.data.success){
-
+                                console.log(res);
                             }else{
                                 alert('썸네일 생성에 실패 했습니다.');
                             }

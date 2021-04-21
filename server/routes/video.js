@@ -32,7 +32,7 @@ const upload = multer({
 //             Video
 //=================================
 
-router.post('/uploadfiles', (req, res) => {
+router.post('/uploaded', (req, res) => {
     // 비디오를 서버에 저장한다.
     upload(req, res, err => {
         if(err){
@@ -48,11 +48,14 @@ router.post('/thumbnail', (req, res) => {
     let filePath = "";
     let fileDuration = "";
 
-    ffmpeg.ffprobe(req.body.filePath, function(err, metadata){
+    ffmpeg.ffprobe(req.body.url, function(err, metadata){
+        console.dir(metadata);
+        console.log(metadata.format.duration);
         fileDuration = metadata.format.duration;
     })
 
-    ffmpeg(req,body,url)
+    //썸네일 생
+    ffmpeg(req.body.url)
         .on('filenames',function(filenames){
             console.log('Will generate' + filenames.join(', '));
             console.log(filenames);
@@ -61,7 +64,7 @@ router.post('/thumbnail', (req, res) => {
         })
         .on('end', function(){
             console.log('Screenshots taken');
-            return res.json({success: true, url: filePath, fileDuration: fileDuration})
+            return res.json({success: true, url: filePath,fileDuration: fileDuration})
         })
         .on('error', function(err){
             console.error(err);
@@ -69,7 +72,7 @@ router.post('/thumbnail', (req, res) => {
         })
         .screenshot({
             count: 3,
-            folder: 'uploads/thumbnails',
+            folder: 'uploads/thumbnails/',
             size: '320x240',
             filename: 'thumbnail-%b.png'
         });
