@@ -1,43 +1,37 @@
 const mongoose = require('mongoose');
+const Schema = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const videoSchema = mongoose.Schema({
     writer: {
-        type:String,
-        maxlength:50
+        type:Schema.Types.ObjectId,
+        ref:'User'
     },
     title: {
         type:String,
         maxlength:50
     },
-    description: {
-        type:String,
-        maxlength:50
-    },
+    description: String,
     privacy: {
-        type:String,
-        maxlength:50
+        type:Number
     },
     category: {
-        type:String,
-        maxlength:50
+        type:String
     },
     filePath: {
-        type:String,
-        maxlength:50
+        type:String
     },
     views: {
-        type:String,
-        maxlength:50
+        type:Number,
+        default: 0
     },
     duration: {
-        type:String,
-        maxlength:50
+        type:String
     },
     thumbnail: {
-        type:String,
-        maxlength:50
+        type:String
     }
-})
+
+},{timestamp: true});
 
 
 const Video = mongoose.model('Video', videoSchema);
