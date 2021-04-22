@@ -14,7 +14,7 @@
 }
 
 .menu__logo a {
-  display: inline-block;
+  display: inline;
   font-size: 20px;
   padding: 19px 20px;
 }
