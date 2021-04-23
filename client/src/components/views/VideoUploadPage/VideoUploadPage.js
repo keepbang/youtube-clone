@@ -104,7 +104,7 @@ function VideoUploadPage(props){
 
                     setTimeout(() => {
                         props.history.push('/');
-                    },3000)
+                    },2000)
                 }else{
                     alert('비디오 업로드에 실패 했습니다.')
                 }
