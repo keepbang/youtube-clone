@@ -32,6 +32,7 @@ const upload = multer({
 //             Video
 //=================================
 
+
 router.post('/uploaded', (req, res) => {
     // 비디오를 서버에 저장한다.
     upload(req, res, err => {
@@ -85,6 +86,15 @@ router.post('/uploadVideo',(req,res) => {
         if(err) return res.json({success: false, err})
         res.status(200).json({success: true})
     });
+})
+
+router.get('/getVideos',(req,res) => {
+    Video.find()
+        .populate('writer')//populate를 해야 User객체도 가져온다
+        .exec((err, videos)=>{
+            if(err) return res.status(400).send(err);
+            res.status(200).json({success:true, videos})
+        })
 })
 
 module.exports = router;
