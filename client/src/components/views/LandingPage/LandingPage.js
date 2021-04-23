@@ -43,11 +43,16 @@ function LandingPage() {
                     <Avatar src={video.writer.image}/>
                 }
                 title={video.title}
-                description=""
+                description={video.description}
+                style={{
+                        whiteSpace: 'nowrap',
+                        textOverflow: 'ellipsis',
+                        overflow: 'hidden'
+                }}
             />
-            <span>{video.writer.name}</span><br/>
+            {/*<span>{video.writer.name}</span><br/>*/}
             <span
-                style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createAt).format("MMM")}</span>
+                style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createAt).format("MMM Do YY")}</span>
         </Col>
     })
 
