@@ -50,7 +50,7 @@ function LandingPage() {
                         overflow: 'hidden'
                 }}
             />
-            {/*<span>{video.writer.name}</span><br/>*/}
+            <span>{video.writer.name}</span><br/>
             <span
                 style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createAt).format("MMM Do YY")}</span>
         </Col>
