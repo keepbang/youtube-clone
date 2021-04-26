@@ -27,8 +27,10 @@ function LandingPage() {
         let minutes = Math.floor(video.duration / 60);
         let seconds = Math.floor((video.duration - minutes * 60));
 
-        return <Col lg={6} md={8} xs={24}>
-            <a href={`/video/post/${video._id}`}>
+
+
+        return <Col lg={6} md={8} xs={24} key={index}>
+            <a href={`/video/${video._id}`}>
                 <div style={{position: 'relative'}}>
                     <img style={{width: '100%'}} src={`http://localhost:5000/${video.thumbnail}`}
                          alt="thumbnail"/>
@@ -54,20 +56,25 @@ function LandingPage() {
             <span
                 style={{marginLeft: '3rem'}}>{video.views} views</span> - <span>{moment(video.createAt).format("MMM Do YY")}</span>
         </Col>
-    })
+    });
+
+    const emptyVideo = () =>{
+        return
+    };
 
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
             <Title level={2}>Recommended</Title>
             <hr />
-            <Row gutter={[32,16]}>
-                {
-                    Videos ?
-                        renderCards
-                        :
-                        <span style={{ fontSize: '2rem' }}>Let's Video Upload!</span>
-                }
-            </Row>
+            {
+                Videos.length !== 0?
+                    <Row gutter={[32,16]}>
+                        {renderCards}
+                    </Row>
+                    :<div style={{ fontSize: '2rem', textAlign:'center' }}>Let's Video Upload!</div>
+
+            }
+
         </div>
     )
 }
