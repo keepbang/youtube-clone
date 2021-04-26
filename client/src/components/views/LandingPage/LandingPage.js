@@ -58,10 +58,6 @@ function LandingPage() {
         </Col>
     });
 
-    const emptyVideo = () =>{
-        return
-    };
-
     return (
         <div style={{width: '85%', margin: '3rem auto'}}>
             <Title level={2}>Recommended</Title>
