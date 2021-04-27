@@ -14,6 +14,6 @@ const subscriberSchema = mongoose.Schema({
 },{timestamp: true});
 
 
-const Subscriber = mongoose.model('Video', subscriberSchema);
+const Subscriber = mongoose.model('Subscriber', subscriberSchema);
 
 module.exports = { Subscriber }
