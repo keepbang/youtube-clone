@@ -1,34 +1,37 @@
-import React,{useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import Axios from "axios";
 
-const Subscribe = (props) => {
+function Subscribe(props) {
+
+    const userTo = props.userTo;
+    const userFrom = props.userFrom;
 
     const [SubscribeNumber, setSubscribeNumber] = useState(0);
     const [IsSubscribed, setIsSubscribed] = useState(false);
 
     useEffect(() => {
 
-        let variable = {
-            userTo: props.userTo
+        let subscribedVariable = {
+            userTo: userTo,
+            userFrom: userFrom
         }
 
-        Axios.post('/api/subscribe/subscribeNumber', variable)
+        Axios.post('/api/subscribe/subscribeNumber', subscribedVariable)
             .then(res => {
                if(res.data.success){
+                   console.log(res.data);
                     setSubscribeNumber(res.data.subscribeNumber);
                }else{
                    alert('구독자 수 정보를 받아오지 못했습니다.');
                }
             });
 
-        let subscribedVariable = {
-            userTo: props.userTo,
-            userFrom: props.userFrom
-        }
+
 
         Axios.post('/api/subscribe/subscribed', subscribedVariable)
             .then(res => {
                 if(res.data.success){
+                    console.log(res.data);
                     setIsSubscribed(res.data.isSubscribed);
                 }else{
                     alert('구독정보를 받아오지 못했습니다.');
@@ -40,8 +43,8 @@ const Subscribe = (props) => {
 
     const onSubscribe = () => {
         let subscribedVariable = {
-            userTo: props.userTo,
-            userFrom: props.userFrom
+            userTo: userTo,
+            userFrom: userFrom
         }
 
         if(IsSubscribed){ //구독 취소
@@ -70,17 +73,20 @@ const Subscribe = (props) => {
 
     return (
         <div>
-            <button
+            {
+                props.userTo !== props.userFrom?
+                <button
                 style={{
                     backgroundColor: `${IsSubscribed ? '#AAAAAA' : '#CC0000'}`, borderRadius: '4px',
                     color: '#fff', padding: '10px 16px',
                     fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase',
                     border: 'none', cursor: 'pointer'
                 }}
-                onClick = {onSubscribe}
+                onClick={onSubscribe}
             >
-                {SubscribeNumber} {IsSubscribed? 'Subscribed' : 'Subscribe'}
+                {SubscribeNumber} {IsSubscribed ? 'Subscribed' : 'Subscribe'}
             </button>
+            : <Fragment></Fragment>}
         </div>
     )
 }
