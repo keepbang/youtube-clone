@@ -71,7 +71,6 @@ function SubscriptionPage() {
                         {renderCards}
                     </Row>
                     :<div style={{ fontSize: '2rem', textAlign:'center' }}>Not Subscribed Videos</div>
-
             }
 
         </div>

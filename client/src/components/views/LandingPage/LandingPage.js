@@ -63,11 +63,10 @@ function LandingPage() {
             <hr />
             {
                 Videos.length !== 0?
-                    <Row gutter={[32,16]}>
-                        {renderCards}
-                    </Row>
-                    :<div style={{ fontSize: '2rem', textAlign:'center' }}>Let's Video Upload!</div>
-
+                <Row gutter={[32,16]}>
+                    {renderCards}
+                </Row>
+                :<div style={{ fontSize: '2rem', textAlign:'center' }}>Let's Video Upload!</div>
             }
 
         </div>

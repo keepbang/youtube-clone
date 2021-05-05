@@ -73,9 +73,7 @@ function Subscribe(props) {
 
     return (
         <div>
-            {
-                props.userTo !== props.userFrom?
-                <button
+            <button
                 style={{
                     backgroundColor: `${IsSubscribed ? '#AAAAAA' : '#CC0000'}`, borderRadius: '4px',
                     color: '#fff', padding: '10px 16px',
@@ -86,7 +84,6 @@ function Subscribe(props) {
             >
                 {SubscribeNumber} {IsSubscribed ? 'Subscribed' : 'Subscribe'}
             </button>
-            : <Fragment></Fragment>}
         </div>
     )
 }
