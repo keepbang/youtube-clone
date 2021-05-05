@@ -12,7 +12,7 @@ function VideoDetailPage(props) {
 
     const [VideoDetail, setVideoDetail] = useState([]);
 
-    const [CommentList, setCommentList] = useState([]);
+    const [Comments, setComments] = useState([]);
 
     useEffect(() => {
         Axios.post('/api/video/getVideoDetail', variable)
@@ -23,6 +23,16 @@ function VideoDetailPage(props) {
                         alert('비디오 정보를 가져오지 못했습니다.')
                     }
                 })
+
+        Axios.post('/api/comment/getComments', variable)
+            .then(res => {
+                if(res.data.success) {
+                    console.log(res.data.comments);
+                    setComments(res.date.comments);
+                }else{
+                    alert('댓글 정보를 가져오지 못했습니다.');
+                }
+            })
     },[])
 
 
@@ -48,7 +58,7 @@ function VideoDetailPage(props) {
                         </List.Item>
 
                         {/* Comments */}
-                        <Comment />
+                        <Comment videoId={videoId} commentLists={Comments}/>
 
                     </div>
                 </Col>
