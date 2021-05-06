@@ -26,7 +26,7 @@ router.post("/saveComment", (req, res) => {
 
 });
 
-router.get("/getComments", (req, res) => {
+router.post("/getComments", (req, res) => {
  Comment.find({'videoId':req.body.videoId})
         .populate('writer')
         .exec((err, comments) => {

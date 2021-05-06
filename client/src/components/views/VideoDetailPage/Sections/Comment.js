@@ -23,8 +23,8 @@ function Comment(props) {
         axios.post('/api/comment/saveComment',variables)
             .then(res => {
                 if(res.data.success){
-                    console.log(res.data.result);
                     setCommentText("");
+                    props.refreshFunc(res.data.result);
                 }else{
                     alert('댓글 입력에 실패했습니다.');
                 }

@@ -27,8 +27,7 @@ function VideoDetailPage(props) {
         Axios.post('/api/comment/getComments', variable)
             .then(res => {
                 if(res.data.success) {
-                    console.log(res.data.comments);
-                    setComments(res.date.comments);
+                    setComments(res.data.comments);
                 }else{
                     alert('댓글 정보를 가져오지 못했습니다.');
                 }
@@ -36,6 +35,9 @@ function VideoDetailPage(props) {
     },[])
 
 
+    const updateComment = (newComent) => {
+        setComments(Comments.concat(newComent));
+    }
 
     if(VideoDetail.writer) {
 
@@ -58,7 +60,7 @@ function VideoDetailPage(props) {
                         </List.Item>
 
                         {/* Comments */}
-                        <Comment videoId={videoId} commentLists={Comments}/>
+                        <Comment videoId={videoId} commentLists={Comments} refreshFunc={updateComment}/>
 
                     </div>
                 </Col>

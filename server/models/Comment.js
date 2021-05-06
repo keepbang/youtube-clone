@@ -5,12 +5,12 @@ const commentSchema = mongoose.Schema({
     writer: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
-    postId: {
+    }, 
+    videoId: {
         type: Schema.Types.ObjectId,
         ref: 'Video'
     },
-    responseTo : {
+    responseTo: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
