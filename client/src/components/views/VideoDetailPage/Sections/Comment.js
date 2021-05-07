@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React,{useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {useSelector} from 'react-redux'
 import SingleComment from './SingleComment';
+import ReplyComment from './ReplyComment';
 
 function Comment(props) {
 
@@ -24,7 +25,7 @@ function Comment(props) {
             .then(res => {
                 if(res.data.success){
                     setCommentText("");
-                    props.refreshFunc(res.data.result);
+                    props.refreshFunction(res.data.result);
                 }else{
                     alert('댓글 입력에 실패했습니다.');
                 }
@@ -44,7 +45,12 @@ function Comment(props) {
             {
                 props.commentLists &&
                 props.commentLists.map((comment, index) => (
-                    <SingleComment comment={comment} videoId={videoId}/>
+                    (!comment.responseTo &&
+                        <Fragment>
+                            <SingleComment refreshFunction={props.refreshFunction} comment={comment} videoId={videoId} key={index}/>
+                            <ReplyComment commentLists={props.commentLists} parentCommentId={comment._id}  videoId={videoId} refreshFunction={props.refreshFunction}/>
+                        </Fragment>
+                    )
                 ))
                 
             }
@@ -73,3 +79,4 @@ function Comment(props) {
 }
 
 export default Comment
+
