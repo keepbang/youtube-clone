@@ -60,7 +60,8 @@ function Comment(props) {
 
             <form style={{display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'flex-end'}} onSubmit={onSubmit}>
+                        alignItems: 'flex-end',
+                        marginTop: '5px'}} onSubmit={onSubmit}>
                 <textarea
                     style={{width: '100%', borderRadius:'5px', resize: 'none', padding: '10px 15px'}}
                     onChange={handleClick}

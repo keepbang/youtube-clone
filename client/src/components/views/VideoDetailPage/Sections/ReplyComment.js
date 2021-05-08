@@ -42,7 +42,12 @@ function ReplyComment(props) {
             {
                 ChildCommentNumber > 0 &&
                 <p style={{fontSize: '14px',margin: 0, color: 'gray', cursor:'pointer'}} onClick={onHandleChange}>
-                    View {ChildCommentNumber} more comment(s)
+                    {
+                        OpenReplyComments ?
+                        `Hide ${ChildCommentNumber} more comment(s)` :
+                        `View ${ChildCommentNumber} more comment(s)`
+                    }
+
                 </p>
             }
             {
