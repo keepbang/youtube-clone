@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^4.6.2",
-    "concurrently": "^4.1.0",
+    "concurrently": "^6.1.0",
     "nodemon": "^1.19.1"
   }
 }

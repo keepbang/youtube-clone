@@ -11,7 +11,7 @@ const { DisLike } = require("../models/DisLike");
 
 router.post("/getLikes", (req, res) => {
 
-    let variable = {}
+    let variable = {};
 
     if(req.body.videoId){
         variable = {videoId : req.body.videoId}
@@ -22,13 +22,24 @@ router.post("/getLikes", (req, res) => {
     Like.find(variable)
         .exec((err, likes) => {
             if(err) return res.status(400).send(err)
-            res.status(200).join({success: true, likes})
+            res.status(200).json({success: true, likes})
         })
+})
+
+router.post("/getDisLikes", (req, res) => {
+
+    let variable = {};
+
+    if(req.body.videoId){
+        variable = {videoId : req.body.videoId}
+    }else{
+        variable = {commentId : req.body.commentId}
+    }
 
     DisLike.find(variable)
         .exec((err, dislikes) => {
             if(err) return res.status(400).send(err)
-            res.status(200).join({success: true, dislikes})
+            res.status(200).json({success: true, dislikes})
         })
 })
 
