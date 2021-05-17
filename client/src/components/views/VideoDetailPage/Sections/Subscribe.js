@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect, useState} from 'react';
+import {HeartFilled} from '@ant-design/icons';
 import Axios from "axios";
 
 function Subscribe(props) {
@@ -82,7 +83,7 @@ function Subscribe(props) {
                 }}
                 onClick={onSubscribe}
             >
-                {SubscribeNumber} {IsSubscribed ? 'Subscribed' : 'Subscribe'}
+                {SubscribeNumber} {IsSubscribed ? <HeartFilled style={{color: "red"}} /> : <HeartFilled />}
             </button>
         </div>
     )
