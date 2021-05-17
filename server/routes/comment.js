@@ -5,7 +5,7 @@ const router = express.Router();
 const { Comment } = require("../models/Comment");
 
 //=================================
-//             Subscribe
+//             Comment
 //=================================
 
 
