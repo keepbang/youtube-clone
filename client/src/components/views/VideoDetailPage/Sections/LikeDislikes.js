@@ -51,6 +51,73 @@ function LikeDislikes(props) {
             })
     },[])
 
+    const onLikeHandler = () => {
+
+        if(LikeAction === null){
+            Axios.post('/api/like/upLike', variable)
+                .then(res => {
+                    if(res.data.success){
+
+                        setLikes(Likes + 1);
+                        setLikeAction('liked');
+
+                        if(DisLikeAction !== null){
+                            setDisLikeAction(null);
+                            setDisLikes(DisLikes - 1);
+                        }
+                    }else{
+                        alert("Like를 올리지 못했습니다.")
+                    }
+                })
+        }else{
+            Axios.post('/api/like/unLike', variable)
+                .then(res => {
+                    if(res.data.success){
+
+                        setLikes(Likes - 1);
+                        setLikeAction(null);
+
+                    }else{
+                        alert("Like를 내리지 못했습니다.")
+                    }
+                })
+        }
+
+
+    }
+
+    const onDisLikeHandler = () => {
+        if(DisLikeAction === null){
+            Axios.post('/api/like/upDisLike', variable)
+                .then(res => {
+                    if(res.data.success){
+
+                        setDisLikes(DisLikes + 1);
+                        setDisLikeAction('disliked');
+
+                        if(LikeAction !== null){
+                            setLikeAction(null);
+                            setLikes(DisLikes - 1);
+                        }
+                    }else{
+                        alert("DisLike를 올리지 못했습니다.")
+                    }
+                })
+        }else{
+            Axios.post('/api/like/unDisLike', variable)
+                .then(res => {
+                    if(res.data.success){
+
+                        setDisLikes(DisLikes - 1);
+                        setDisLikeAction(null);
+
+                    }else{
+                        alert("DisLike를 내리지 못했습니다.")
+                    }
+                })
+        }
+    }
+
 
     return (
         <div>
@@ -58,8 +125,8 @@ function LikeDislikes(props) {
                 <Tooltip title="Like">
                     {
                         LikeAction === 'liked'?
-                            <LikeFilled onClick/> :
-                            <LikeOutlined onClick/>
+                            <LikeFilled onClick={onLikeHandler}/> :
+                            <LikeOutlined onClick={onLikeHandler}/>
                     }
                 </Tooltip>
                 <span style={{paddingLeft: '8px', cursor:'auto'}}>{Likes}</span>
@@ -69,8 +136,8 @@ function LikeDislikes(props) {
                 <Tooltip title="Dislike">
                     {
                         DisLikeAction === 'disliked'?
-                            <DislikeFilled onClick/> :
-                            <DislikeOutlined onClick/>
+                            <DislikeFilled onClick={onDisLikeHandler}/> :
+                            <DislikeOutlined onClick={onDisLikeHandler}/>
                     }
                 </Tooltip>
                 <span style={{paddingLeft: '8px', cursor:'auto'}}>{DisLikes}</span>
