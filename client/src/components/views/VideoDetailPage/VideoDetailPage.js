@@ -47,7 +47,7 @@ function VideoDetailPage(props) {
 
         const subscribeButton = VideoDetail.writer._id !== localStorage.getItem('userId') && <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>;
 
-        const likesSubscripeArray = () => (user.userData && !user.userData.isAuth) &&
+        const likesSubscribeArray = (user.userData && !user.userData.isAuth) ||
             [<LikeDislikes video
                            userId={localStorage.getItem('userId')}
                            videoId={videoId}/>, subscribeButton];
@@ -59,7 +59,7 @@ function VideoDetailPage(props) {
                         <video style={{width: '100%'}} src={`http://localhost:5000/${VideoDetail.filePath}`} controls/>
 
                         <List.Item
-                            actions={likesSubscripeArray}
+                            actions={likesSubscribeArray}
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={VideoDetail.writer.image}/>}

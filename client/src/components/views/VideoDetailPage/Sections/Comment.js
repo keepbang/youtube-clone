@@ -11,11 +11,12 @@ function Comment(props) {
     const [CommentText, setCommentText] = useState("");
     const user = useSelector(state => state.user);
 
+    const userCheck = user.userData && !user.userData.isAuth;
 
     const onSubmit = e => {
         e.preventDefault();
 
-        if(user.userData && !user.userData.isAuth){
+        if(userCheck){
             alert('댓글은 로그인 후 사용할 수 있습니다.');
             return;
         }
@@ -42,6 +43,12 @@ function Comment(props) {
     const handleClick = e => {
         setCommentText(e.currentTarget.value);
     }
+
+    const submitButton = userCheck ||
+        <button style={{width:'8%', height:'40px', marginTop: '5px', marginBottom: '10px'
+            , border: 'none', borderRadius: '5px', background: '#04B4AE'
+            , color: '#fff', fontWeight: '500', fontSize: 'larger', cursor: 'pointer'
+        }} onClick={onSubmit}>입력</button>;
 
     return (
         <div>
@@ -71,15 +78,13 @@ function Comment(props) {
                         marginTop: '5px'}} onSubmit={onSubmit}>
                 <textarea
                     style={{width: '100%', borderRadius:'5px', resize: 'none', padding: '10px 15px'}}
+                    disabled={userCheck ? true : false}
                     onChange={handleClick}
                     value={CommentText}
-                    placeholder="댓글을 입력해주세요."
+                    placeholder={userCheck ? "로그인 후 사용 가능합니다." : "댓글을 입력해주세요."}
                 />
-                
-                <button style={{width:'8%', height:'40px', marginTop: '5px', marginBottom: '10px'
-                    , border: 'none', borderRadius: '5px', background: '#04B4AE'
-                    , color: '#fff', fontWeight: '500', fontSize: 'larger', cursor: 'pointer'
-                    }} onClick={onSubmit}>입력</button>
+
+                {submitButton}
 
             </form>
         </div>

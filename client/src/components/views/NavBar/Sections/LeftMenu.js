@@ -7,8 +7,9 @@ const MenuItemGroup = Menu.ItemGroup;
 function LeftMenu(props) {
   const user = useSelector(state => state.user)
 
-  const subscripPage = () => (user.userData && !user.userData.isAuth) &&
-      <Menu.Item key="subscription"> <a href="/subscription">Subscription</a> </Menu.Item>
+  const subscribePage = (user.userData && !user.userData.isAuth) ||
+      <Menu.Item key="subscription"> <a href="/subscription">Subscription</a> </Menu.Item>;
+
 
   return (
     <Menu mode={props.mode}>
@@ -16,7 +17,7 @@ function LeftMenu(props) {
       <a href="/">Home</a>
     </Menu.Item>
       {
-        subscripPage
+        subscribePage
       }
 
   </Menu>

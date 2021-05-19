@@ -136,7 +136,7 @@ function LikeDislikes(props) {
                 <Tooltip title="Like">
                     {
                         LikeAction === 'liked'?
-                            <LikeFilled onClick={onLikeHandler}/> :
+                            <LikeFilled style={{color: '#CD6155'}} onClick={onLikeHandler}/> :
                             <LikeOutlined onClick={onLikeHandler}/>
                     }
                 </Tooltip>
@@ -147,7 +147,7 @@ function LikeDislikes(props) {
                 <Tooltip title="Dislike">
                     {
                         DisLikeAction === 'disliked'?
-                            <DislikeFilled onClick={onDisLikeHandler}/> :
+                            <DislikeFilled style={{color: '#5499C7'}} onClick={onDisLikeHandler}/> :
                             <DislikeOutlined onClick={onDisLikeHandler}/>
                     }
                 </Tooltip>

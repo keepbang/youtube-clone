@@ -13,7 +13,9 @@ router.post("/saveComment", (req, res) => {
 
     const comment = new Comment(req.body);
 
-    console.debug(req.body);
+    if(req.body.writer){
+        return res.json({success: false});
+    }
 
     comment.save((err1, comment) => {
         if(err1) return res.json({success: false, err1});
