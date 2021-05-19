@@ -13,6 +13,8 @@ router.post("/saveComment", (req, res) => {
 
     const comment = new Comment(req.body);
 
+    console.debug(req.body);
+
     comment.save((err1, comment) => {
         if(err1) return res.json({success: false, err1});
 

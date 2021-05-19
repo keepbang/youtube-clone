@@ -45,12 +45,14 @@ router.post("/getDisLikes", (req, res) => {
 
 router.post("/upLike", (req, res) => {
 
-    let variable = {};
+    let variable = {
+        userId : req.body.userId
+    };
 
     if(req.body.videoId){
-        variable = {videoId : req.body.videoId}
+        variable.videoId = req.body.videoId
     }else{
-        variable = {commentId : req.body.commentId}
+        variable.commentId = req.body.commentId
     }
 
     // Like collection에다가 클릭 정보를 넣어준다.
@@ -60,7 +62,7 @@ router.post("/upLike", (req, res) => {
     like.save((err, likeResult) => {
         if(err) return res.json({success: false, err});
         // 만약에 Dislike 이 이미 클릭 되있다면, Dislike을 1 줄여준다.
-        DisLike.findByIdAndDelete(variable)
+        DisLike.deleteOne(variable)
             .exec((err,disLikeResult) => {
                 if(err) return res.status(400).json({success: false, err})
                 res.status(200).json({success: true})
@@ -71,34 +73,34 @@ router.post("/upLike", (req, res) => {
 
 router.post("/unLike", (req, res) => {
 
-    let variable = {};
+    let variable = {
+        userId : req.body.userId
+    };
 
     if(req.body.videoId){
-        variable = {videoId : req.body.videoId}
+        variable.videoId = req.body.videoId
     }else{
-        variable = {commentId : req.body.commentId}
+        variable.commentId = req.body.commentId
     }
 
-    // Like collection에다가 클릭 정보를 넣어준다.
-
-    const like = new Like(variable)
-
-    like.findByIdAndDelete(variable)
+    Like.deleteOne(variable)
         .exec((err, result) => {
             if(err) return res.status(400).json({success: false, err})
-            return res.status(200).json({success: true})
+            res.status(200).json({success: true})
         })
 
 })
 
 router.post("/upDisLike", (req, res) => {
 
-    let variable = {};
+    let variable = {
+        userId : req.body.userId
+    };
 
     if(req.body.videoId){
-        variable = {videoId : req.body.videoId}
+        variable.videoId = req.body.videoId
     }else{
-        variable = {commentId : req.body.commentId}
+        variable.commentId = req.body.commentId
     }
 
     // Like collection에다가 클릭 정보를 넣어준다.
@@ -108,7 +110,7 @@ router.post("/upDisLike", (req, res) => {
     dislike.save((err, disLikeResult) => {
         if(err) return res.json({success: false, err});
         // 만약에 Dislike 이 이미 클릭 되있다면, Dislike을 1 줄여준다.
-        Like.findByIdAndDelete(variable)
+        Like.deleteOne(variable)
             .exec((err,likeResult) => {
                 if(err) return res.status(400).json({success: false, err})
                 res.status(200).json({success: true})
@@ -119,22 +121,21 @@ router.post("/upDisLike", (req, res) => {
 
 router.post("/unDisLike", (req, res) => {
 
-    let variable = {};
+    let variable = {
+        userId : req.body.userId
+    };
 
     if(req.body.videoId){
-        variable = {videoId : req.body.videoId}
+        variable.videoId = req.body.videoId
     }else{
-        variable = {commentId : req.body.commentId}
+        variable.commentId = req.body.commentId
     }
 
-    // Like collection에다가 클릭 정보를 넣어준다.
 
-    const dislike = new DisLike(variable)
-
-    dislike.findByIdAndDelete(variable)
+    DisLike.deleteOne(variable)
         .exec((err, result) => {
             if(err) return res.status(400).json({success: false, err})
-            return res.status(200).json({success: true})
+            res.status(200).json({success: true})
         })
 
 })

@@ -45,7 +45,6 @@ router.post('/uploaded', (req, res) => {
 });
 
 router.post('/getVideoDetail',(req,res) => {
-    console.log(req);
     Video.findOne({"_id": req.body.videoId})
         .populate('writer')
         .exec((err, videoDetail) => {
@@ -61,8 +60,6 @@ router.post('/thumbnail', (req, res) => {
     let fileDuration = "";
 
     ffmpeg.ffprobe(req.body.url, function(err, metadata){
-        console.dir(metadata);
-        console.log(metadata.format.duration);
         fileDuration = metadata.format.duration;
     })
 

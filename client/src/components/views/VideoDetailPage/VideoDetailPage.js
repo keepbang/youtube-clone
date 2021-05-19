@@ -5,8 +5,10 @@ import SideVideo from "./Sections/SideVideo";
 import Subscribe from "./Sections/Subscribe";
 import Comment from "./Sections/Comment";
 import LikeDislikes from "./Sections/LikeDislikes";
+import {useSelector} from "react-redux";
 
 function VideoDetailPage(props) {
+    const user = useSelector(state => state.user)
 
     const videoId = props.match.params.videoId
     const variable = {videoId:videoId};
@@ -42,7 +44,13 @@ function VideoDetailPage(props) {
 
     if(VideoDetail.writer) {
 
+
         const subscribeButton = VideoDetail.writer._id !== localStorage.getItem('userId') && <Subscribe userTo={VideoDetail.writer._id} userFrom={localStorage.getItem('userId')}/>;
+
+        const likesSubscripeArray = () => (user.userData && !user.userData.isAuth) &&
+            [<LikeDislikes video
+                           userId={localStorage.getItem('userId')}
+                           videoId={videoId}/>, subscribeButton];
 
         return (
             <Row gutter={[16, 16]}>
@@ -51,11 +59,7 @@ function VideoDetailPage(props) {
                         <video style={{width: '100%'}} src={`http://localhost:5000/${VideoDetail.filePath}`} controls/>
 
                         <List.Item
-                            actions={[<LikeDislikes video
-                                                    userId={localStorage.getItem('userId')}
-                                                    videoId={videoId}
-
-                            />, subscribeButton]}
+                            actions={likesSubscripeArray}
                         >
                             <List.Item.Meta
                                 avatar={<Avatar src={VideoDetail.writer.image}/>}

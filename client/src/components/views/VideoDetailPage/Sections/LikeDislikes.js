@@ -25,7 +25,9 @@ function LikeDislikes(props) {
         Axios.post('/api/like/getLikes', variable)
             .then(res => {
                 if(res.data.success){
+
                     setLikes(res.data.likes.length);
+
                     res.data.likes.map(like => {
                         if(like.userId === props.userId){
                             setLikeAction('liked');
@@ -38,13 +40,17 @@ function LikeDislikes(props) {
 
         Axios.post('/api/like/getDisLikes', variable)
             .then(res => {
+
                 if(res.data.success){
+
                     setDisLikes(res.data.dislikes.length);
+
                     res.data.dislikes.map(dislike => {
                         if(dislike.userId === props.userId){
                             setDisLikeAction('disliked');
                         }
                     })
+
                 }else{
                     alert("DisLikes 정보를 가져오지 못했습니다.")
                 }
@@ -54,6 +60,7 @@ function LikeDislikes(props) {
     const onLikeHandler = () => {
 
         if(LikeAction === null){
+
             Axios.post('/api/like/upLike', variable)
                 .then(res => {
                     if(res.data.success){
@@ -65,11 +72,13 @@ function LikeDislikes(props) {
                             setDisLikeAction(null);
                             setDisLikes(DisLikes - 1);
                         }
+
                     }else{
                         alert("Like를 올리지 못했습니다.")
                     }
                 })
         }else{
+
             Axios.post('/api/like/unLike', variable)
                 .then(res => {
                     if(res.data.success){
@@ -88,6 +97,7 @@ function LikeDislikes(props) {
 
     const onDisLikeHandler = () => {
         if(DisLikeAction === null){
+
             Axios.post('/api/like/upDisLike', variable)
                 .then(res => {
                     if(res.data.success){
@@ -97,8 +107,9 @@ function LikeDislikes(props) {
 
                         if(LikeAction !== null){
                             setLikeAction(null);
-                            setLikes(DisLikes - 1);
+                            setLikes(Likes - 1);
                         }
+
                     }else{
                         alert("DisLike를 올리지 못했습니다.")
                     }

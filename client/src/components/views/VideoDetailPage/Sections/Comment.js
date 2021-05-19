@@ -9,17 +9,24 @@ function Comment(props) {
     const videoId = props.videoId;
 
     const [CommentText, setCommentText] = useState("");
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => state.user);
 
 
     const onSubmit = e => {
         e.preventDefault();
+
+        if(user.userData && !user.userData.isAuth){
+            alert('댓글은 로그인 후 사용할 수 있습니다.');
+            return;
+        }
 
         const variables = {
             content: CommentText,
             writer: user.userData._id,
             videoId: videoId
         }
+
+        console.log(user);
 
         axios.post('/api/comment/saveComment',variables)
             .then(res => {

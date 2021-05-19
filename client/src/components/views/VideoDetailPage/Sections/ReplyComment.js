@@ -22,7 +22,7 @@ function ReplyComment(props) {
         props.commentLists.map((comment, index) => (
 
             <Fragment>
-                {console.log(comment.responseTo === parentCommentId)}
+                {console.log(comment)}
                 {
                     comment.responseTo === parentCommentId &&
                     <div style={{width: '80%', marginLeft: '40px'}}>
